@@ -1,5 +1,7 @@
 # essence-thinking · 本质思维引擎
 
+[![Release](https://img.shields.io/github/v/release/qwertasdf123-xkw/essence-thinking)](https://github.com/qwertasdf123-xkw/essence-thinking/releases)
+
 > **无限进化，你想即所得。**
 
 将个人思维方法论（五大思维公理）工程化为可自进化的思考中枢：统一思考协议 + 状态外化 + 能力路由，可与任意 skill / pipeline 无限叠加闭环。
@@ -21,6 +23,10 @@ A self-evolving thinking-orchestration skill: unified thinking protocol + state 
 - **Skill 路由层**：判断 → 寻址 → 加载 → 回收，按共性定位能力，按 token 预算渐进加载。
 - **自进化体系**：`.essence/` 进化库（模式库 + 思维日志 + 进化总账），越用越强。
 
+## 安装
+
+下载 [最新 release](https://github.com/qwertasdf123-xkw/essence-thinking/releases) 中的 `essence-thinking.skill`，在 Kimi Work 中安装，或将 `essence-thinking/` 目录放入你的 skills 目录（如 `~/.kimi/skills/` 或项目 `.agents/skills/`）。
+
 ## 目录结构
 
 ```
@@ -36,9 +42,9 @@ essence-thinking/
     └── et_log.py         # 进化库写入工具
 ```
 
-## 安装
+## 版本
 
-将 `essence-thinking/` 目录放入你的 skills 目录（如 `~/.kimi/skills/` 或项目 `.agents/skills/`），或直接安装 `.skill` 打包文件。
+- [v1.0](https://github.com/qwertasdf123-xkw/essence-thinking/releases/tag/v1.0) · 无限进化，你想即所得（2026-10-21）
 
 ## 协作生态
 
