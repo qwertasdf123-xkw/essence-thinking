@@ -12,7 +12,8 @@
   2. 更新 .essence/evolution.md 进化总账（模式计数、日志计数、修订历史）
   3. 若指定 --patterns，将新模式骨架追加到 .essence/patterns.md（默认状态 active）
   4. 每次运行自动维护 wiki 层目录，并刷新 wiki/snapshots/latest.md（可用 --no-snapshot 关闭）
-  5. 已存在当日同 slug 日志时自动追加序号，不覆盖
+  5. --patch 将本体补丁提案追加到 .essence/patches/<日期>.md（无感知进化提案队列）
+  6. 已存在当日同 slug 日志时自动追加序号，不覆盖
 """
 
 import argparse
@@ -45,7 +46,9 @@ def ensure_tree(workspace: Path) -> dict:
     root = workspace / ".essence"
     logs = root / "logs"
     wiki = root / "wiki"
+    patches = root / "patches"
     logs.mkdir(parents=True, exist_ok=True)
+    patches.mkdir(parents=True, exist_ok=True)
     (wiki / "inbox").mkdir(parents=True, exist_ok=True)
     (wiki / "moc").mkdir(parents=True, exist_ok=True)
     (wiki / "snapshots").mkdir(parents=True, exist_ok=True)
@@ -153,6 +156,25 @@ def refresh_snapshot(snapshot: Path, workspace: Path, args, date: str) -> None:
             verdict=verdict, chain=chain), encoding="utf-8")
 
 
+def append_patch(patches_dir: Path, task: str, proposals: list, date: str) -> Path:
+    """把本体补丁提案追加到 .essence/patches/<日期>.md，返回文件路径。"""
+    path = patches_dir / f"{date}.md"
+    header = f"# 本体补丁提案 · {date}\n\n（应用规则见 essence-thinking/references/self-evolve.md）\n"
+    if not path.exists():
+        path.write_text(header, encoding="utf-8")
+    text = path.read_text(encoding="utf-8")
+    existing = len(re.findall(r"^### PATCH-", text, flags=re.M))
+    with path.open("a", encoding="utf-8") as f:
+        for i, prop in enumerate(proposals, start=existing + 1):
+            f.write(f"\n### PATCH-{date}-{i}｜类型：（待判定：协议类/低风险类）\n"
+                    f"- 来源：{date}-{slugify(task)}\n"
+                    f"- 现状：（待补）\n"
+                    f"- 提案：{prop}\n"
+                    f"- 影响面：（待补）\n"
+                    f"- 状态：pending\n")
+    return path
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description="写入 essence-thinking 进化库")
     p.add_argument("--workspace", required=True)
@@ -167,6 +189,8 @@ def main() -> int:
     p.add_argument("--revision", default="")
     p.add_argument("--no-snapshot", action="store_true",
                    help="不刷新 wiki/snapshots/latest.md")
+    p.add_argument("--patch", nargs="*", default=[],
+                   help="本体补丁提案（追加到 .essence/patches/<日期>.md）")
     args = p.parse_args()
 
     workspace = Path(args.workspace)
@@ -185,6 +209,10 @@ def main() -> int:
     update_evolution(paths["evolution"], added, args.revision or None)
     if not args.no_snapshot:
         refresh_snapshot(paths["snapshot"], workspace, args, date)
+
+    if args.patch:
+        patch_path = append_patch(paths["root"] / "patches", args.task, args.patch, date)
+        print(f"补丁提案已追加：{patch_path}（{len(args.patch)} 条）")
 
     print(f"日志已写入：{log_path}")
     print(f"新模式骨架追加：{added} 条")
