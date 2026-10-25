@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Package skill
+        run: |
+          python essence-thinking/plugins/release/scripts/package.py --version "${GITHUB_REF_NAME#v}"
+
+      - name: Resolve release notes
+        run: |
+          tag="$GITHUB_REF_NAME"
+          ver="${tag#v}"
+          notes="releases/${ver}.md"
+          if [ ! -f "$notes" ]; then
+            short="${ver%%.*}"
+            notes="releases/v${short}.md"
+          fi
+          if [ ! -f "$notes" ]; then
+            echo "Release notes not found for tag $tag (looked in releases/)" >&2
+            exit 1
+          fi
+          cp "$notes" /tmp/body.md
+          echo "Using release notes: $notes"
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: /tmp/body.md
+          files: essence-thinking.skill
+          fail_on_unmatched_files: true
