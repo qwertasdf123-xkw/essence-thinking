@@ -27,6 +27,7 @@ A self-evolving thinking-orchestration skill: meta-layer closed loop, state exte
 - **旁路沉淀**（side-channel.md）：分支思路 ≤20 秒捕获，主线停顿点批量消费——跃迁发生且无感知。
 - **Skill 路由层**：判断 → 寻址 → 加载 → 预算 → 收割，按共性定位能力，越委托越强。
 - **产出协议**（report.md）：思维报告三级模板，让人类协作方加入闭环。
+- **软约束插件**（plugins/）：context-guard · snapshot-restore · router-scan · release。
 
 ## 目录结构
 
@@ -44,6 +45,11 @@ essence-thinking/
 │   ├── wiki.md           # wiki 层协议
 │   ├── routing.md        # 路由层协议与上下文预算
 │   └── evolution.md      # 自进化体系详规
+├── plugins/              # P0 软约束插件（各含 PLUGIN.md + scripts/）
+│   ├── context-guard/    # 上下文预算守卫
+│   ├── snapshot-restore/ # 思维状态恢复引导
+│   ├── router-scan/      # 本机 skill 索引扫描
+│   └── release/          # 打包发布流水线
 └── scripts/
     └── et_log.py         # 进化库写入工具（日志/模式/补丁/快照）
 ```
@@ -54,6 +60,7 @@ essence-thinking/
 
 ## 版本
 
+- [v1.1.1](https://github.com/qwertasdf123-xkw/essence-thinking/releases/tag/v1.1.1) · 插件落地（2026-10-25）：P0 软约束插件四件套（context-guard / snapshot-restore / router-scan / release）
 - [v1.1](https://github.com/qwertasdf123-xkw/essence-thinking/releases/tag/v1.1) · 越思考越强（2026-10-25）：元体系闭环、无感知补丁、辩证取舍、旁路沉淀、产出协议
 - [v1.0](https://github.com/qwertasdf123-xkw/essence-thinking/releases/tag/v1.0) · 无限进化，你想即所得（2026-10-21）
 

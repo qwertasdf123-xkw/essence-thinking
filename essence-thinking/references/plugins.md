@@ -7,7 +7,7 @@
 1. 判定标准（一句话）
 2. 本体与插件的职责边界
 3. 插件接口约定
-4. 当前插件待办（P0/P1/P2 摘要）
+4. 当前插件清单（P0 已实现 / P1 / P2 摘要）
 5. 插件的进化与回检
 
 ## 1. 判定标准（一句话）
@@ -54,17 +54,23 @@ triggers: <什么时机触发（如"总预算达80%"、"每轮Evolve后"）>
 
 加载规则（与 wiki 协议同构）：路由层按 triggers 命中才加载 PLUGIN.md；scripts 不读直接执行；同时激活插件 ≤3 个。
 
-## 4. 当前插件待办（P0/P1/P2 摘要）
+## 4. 当前插件清单
 
-P0（纯脚本，无外部依赖）：
-- `context-guard`：预算告警与压缩建议（触发：总预算 80%）
-- `snapshot-restore`：新会话 L0→L2 阶梯恢复引导
-- `router-scan`：本机 skills 目录扫描，本地索引供 R1 寻址
-- `release`：打包 + 校验 + 发布引导清单（含"正文必须=releases/vX.md""资产必传"两条硬校验）
+P0（纯脚本）✅ 已实现并实测（2026-10-25，位于 `essence-thinking/plugins/`）：
+- `context-guard`：预算告警与压缩建议（触发：总预算 80%）——`budget.py`，exit 0/1 两路径实测通过
+- `snapshot-restore`：新会话 L0→L2 阶梯恢复引导——`restore.py`，清单输出实测通过
+- `router-scan`：本机 skills 目录扫描，本地索引供 R1 寻址——`scan_skills.py`，扫到 4 个 skill 实测通过
+- `release`：打包 + 硬校验 + 发布指引——`package.py`，负例拦截/正例出包实测通过；四条硬校验含"发布说明非空"（v1.1 教训固化）
 
-P1（对接外部系统）：`dev-pipeline-bridge`、`skill-finder-bridge`、`inbox-digest`
+P1（对接外部系统）待开工：
+- `dev-pipeline-bridge`：把 pipeline.md §6 的映射表做成双向同步脚本——essence Evolve 时自动在 `.dev/STATUS.md` 追加思维状态引用；dev-pipeline gate approve 时回写 essence 日志判定。
+- `skill-finder-bridge`：封装"R2 寻址"标准调用（Agent / kimi-skills-finder 的固定 prompt 模板 + 结果回收格式），路由层只消费标准化结果。
+- `inbox-digest`：inbox 清空仪式脚本化——聚类 ≥20 条 inbox，产出"进 moc / 归档 / 删除"三列提案供确认执行。
 
-P2（生态形态）：进化总账 Canvas 可视化、`automation-evolve` 定时进化、插件注册规范（插件数 >5 时启动）
+P2（生态形态，有真实需求再启动）：
+- `dashboard-canvas`：进化总账 Canvas 可视化
+- `automation-evolve`：定时"定期进化"（聚类日志、提升元模式、进化周报）
+- 插件注册规范 v1（插件数 >5 时）
 
 > 详细设计决策见 `.essence/wiki/moc/moc-插件化.md`。
 
