@@ -4,9 +4,9 @@
 
 > **无限进化，你想即所得。**
 
-将个人思维方法论（五大思维公理）工程化为可自进化的思考中枢：统一思考协议 + 状态外化 + 能力路由，可与任意 skill / pipeline 无限叠加闭环。
+将个人思维方法论工程化为可自进化的思考中枢：元体系闭环 + 状态外化 + 能力路由 + 无感知补丁，可与任意 skill / pipeline 无限叠加闭环。
 
-A self-evolving thinking-orchestration skill: unified thinking protocol + state externalization + skill routing. Stack it with any skill or pipeline to close the loop.
+A self-evolving thinking-orchestration skill: meta-layer closed loop, state externalization, skill routing and imperceptible self-patching. Stack it with any skill or pipeline to close the loop.
 
 ## 五大思维公理（Five Axioms）
 
@@ -16,34 +16,45 @@ A self-evolving thinking-orchestration skill: unified thinking protocol + state 
 4. **思维进化** — 灵感来自思维过程；从事物本身出发；随时进化框架。
 5. **拼装闭环** — 架构的作用不是复用功能，而是形成逻辑闭环。
 
+**元原则**：事实是一切 · 辩证取舍（先正评，再攻击，后取舍）
+
 ## 核心机制
 
-- **ESSENCE 七段循环**：探入 → 剥离 → 叠加 → 提炼 → 编织 → 验证 → 沉淀。任何任务统一思考协议。
+- **ESSENCE 七段循环**：探入 → 剥离 → 叠加 → 提炼 → 编织 → 验证（分级）→ 沉淀。任何任务统一思考协议。
+- **元体系**（meta.md）：事实→元原则→元逻辑→方法→产物五层结构，层间双向闭环，越深层修订门槛越高。
 - **知识 wiki 层**：`inbox/`（原料）→ `moc/`（主题索引）→ `snapshots/`（项目快照）。上下文是可丢弃缓存，思维状态永不丢。
-- **Skill 路由层**：判断 → 寻址 → 加载 → 回收，按共性定位能力，按 token 预算渐进加载。
-- **自进化体系**：`.essence/` 进化库（模式库 + 思维日志 + 进化总账），越用越强。
-
-## 安装
-
-下载 [最新 release](https://github.com/qwertasdf123-xkw/essence-thinking/releases) 中的 `essence-thinking.skill`，在 Kimi Work 中安装，或将 `essence-thinking/` 目录放入你的 skills 目录（如 `~/.kimi/skills/` 或项目 `.agents/skills/`）。
+- **无感知进化**（self-evolve.md）：结论经补丁队列延迟合并回本体——快速记录、批量应用、合并必有记录。
+- **旁路沉淀**（side-channel.md）：分支思路 ≤20 秒捕获，主线停顿点批量消费——跃迁发生且无感知。
+- **Skill 路由层**：判断 → 寻址 → 加载 → 预算 → 收割，按共性定位能力，越委托越强。
+- **产出协议**（report.md）：思维报告三级模板，让人类协作方加入闭环。
 
 ## 目录结构
 
 ```
 essence-thinking/
-├── SKILL.md              # 主协议
+├── SKILL.md              # 主协议（七段循环 + 元原则 + 各层接口）
 ├── references/
 │   ├── philosophy.md     # 五大公理展开
+│   ├── meta.md           # 元体系：五层结构与闭环
+│   ├── self-evolve.md    # 无感知进化协议（补丁队列）
+│   ├── side-channel.md   # 旁路沉淀协议
+│   ├── report.md         # 产出报告协议
+│   ├── plugins.md        # 软约束插件化规范
 │   ├── pipeline.md       # pipeline 集成 + dev-pipeline 互操作
 │   ├── wiki.md           # wiki 层协议
 │   ├── routing.md        # 路由层协议与上下文预算
 │   └── evolution.md      # 自进化体系详规
 └── scripts/
-    └── et_log.py         # 进化库写入工具
+    └── et_log.py         # 进化库写入工具（日志/模式/补丁/快照）
 ```
+
+## 安装
+
+下载 [最新 release](https://github.com/qwertasdf123-xkw/essence-thinking/releases) 中的 `essence-thinking.skill`，在 Kimi Work 中安装，或将 `essence-thinking/` 目录放入你的 skills 目录（如 `~/.kimi/skills/` 或项目 `.agents/skills/`）。
 
 ## 版本
 
+- [v1.1](https://github.com/qwertasdf123-xkw/essence-thinking/releases/tag/v1.1) · 越思考越强（2026-10-25）：元体系闭环、无感知补丁、辩证取舍、旁路沉淀、产出协议
 - [v1.0](https://github.com/qwertasdf123-xkw/essence-thinking/releases/tag/v1.0) · 无限进化，你想即所得（2026-10-21）
 
 ## 协作生态
