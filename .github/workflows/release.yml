@@ -27,7 +27,7 @@ jobs:
           ver="${tag#v}"
           notes="essence-thinking/releases/v${ver}.md"
           if [ ! -f "$notes" ]; then
-            short="${ver%%.*}"
+            short="${ver%.*}"
             notes="essence-thinking/releases/v${short}.md"
           fi
           if [ ! -f "$notes" ]; then
