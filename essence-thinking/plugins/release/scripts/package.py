@@ -15,6 +15,7 @@ import os
 import re
 import sys
 import zipfile
+from datetime import date
 
 FM_RE = re.compile(r"^---\s*\n(.*?)\n---", re.S)
 
@@ -52,14 +53,16 @@ def main() -> int:
         fail(f"目录名 '{name_dir}' ≠ frontmatter name '{name}'")
 
     candidates = [f"v{args.version}.md"]
-    if args.version.endswith(".0"):
-        candidates.append(f"v{args.version[:-2]}.md")
+    if args.version.count(".") >= 2:
+        candidates.append(f"v{args.version.rsplit('.', 1)[0]}.md")
+    elif args.version.count(".") == 1:
+        candidates.append(f"v{args.version.split('.', 1)[0]}.md")
     notes = next((os.path.join(skill_dir, "releases", c) for c in dict.fromkeys(candidates)
                   if os.path.isfile(os.path.join(skill_dir, "releases", c))), None)
     if notes is None:
         fail(f"发布说明不存在：releases/v{args.version}.md（正文唯一来源；也尝试了 {candidates}）")
     if not open(notes, encoding="utf-8").read().strip():
-        fail(f"发布说明为空：{notes}（v1.1 教训：正文非空是硬校验）")
+        fail(f"发布说明为空：releases/v{args.version}.md（v1.1 教训：正文非空是硬校验）")
 
     with open(os.path.join(skill_dir, "VERSION"), "w", encoding="utf-8") as f:
         f.write(args.version + "\n")
