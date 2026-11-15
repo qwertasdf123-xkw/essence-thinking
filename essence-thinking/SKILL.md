@@ -1,6 +1,6 @@
 ---
 name: essence-thinking
-description: 本质思维引擎——将用户的五大思维公理（共性抽象、设计思维、分层本质、思维进化、拼装闭环）工程化为可复用的思考流程，内置知识 wiki 层（inbox/MOC/snapshot）、skill 路由、上下文预算控制、无感知自我进化与旁路沉淀机制。当用户面对复杂问题需要拆解、做架构/方案设计需要找最优解、需要把多个知识/能力拼装成闭环、复盘一次任务沉淀可复用模式、需要为项目建立可渐进加载的思维索引、需要产出给人协作的报告，或任何其他 skill / pipeline（如 dev-pipeline）需要一个"思考中枢"来串联阶段时使用。Use when the user says "用本质思维分析"、"拆解一下这个问题"、"这套架构的本质是什么"、"帮我把这些能力拼成闭环"、"复盘并沉淀模式"、"帮我找合适的skill来处理这个任务"、"出一份思维报告"，或当任意工作流需要统一的分析、设计、验证、路由、产出与沉淀阶段。
+description: 本质思维引擎——将用户的五大思维公理（共性抽象、设计思维、分层本质、思维进化、拼装闭环）工程化为可复用的思考流程，内置知识 wiki 层（inbox/MOC/snapshot）、skill 路由、上下文预算控制与无感知自我进化机制。当用户面对复杂问题需要拆解、做架构/方案设计需要找最优解、需要把多个知识/能力拼装成闭环、复盘一次任务沉淀可复用模式、需要为项目建立可渐进加载的思维索引、需要产出给人协作的报告，或任何其他 skill / pipeline（如 dev-pipeline）需要一个"思考中枢"来串联阶段时使用。Use when the user says "用本质思维分析"、"拆解一下这个问题"、"这套架构的本质是什么"、"帮我把这些能力拼成闭环"、"复盘并沉淀模式"、"帮我找合适的skill来处理这个任务"、"出一份思维报告"，或当任意工作流需要统一的分析、设计、验证、路由、产出与沉淀阶段。
 ---
 
 # 本质思维引擎 (Essence Thinking Engine)
@@ -48,6 +48,15 @@ E 沉淀 Evolve       → 新共性、新模式写回进化库与 wiki 层；结
 | Network | 闭环架构方案（含选型理由与类比依据） | 方案 + 类比表 |
 | Consolidate | 辩证取舍表：优势/劣势/取舍结论 | 辩证表 + 判定 |
 | Evolve | 模式条目 + 日志 + snapshot 刷新 + 补丁提案（如有） | 追加到进化库 |
+
+## 任务策略路由（任务 → 思维与知识策略契约）
+
+Explore 后，按任务认知结构编译**暂定策略契约**：主/辅场景与置信度、ESSENCE 路径、Wiki 加载视图、检索与停止条件、验证强度、重路由条件。它决定“怎样思考与获取知识”，不预选具体 skill；Extract 后仍由 Skill 能力路由决定“委托谁执行”。
+
+- 复合任务用主场景＋附属场景，必要时拆成子任务契约；低置信度只做 Explore→Strip 与最小检索，先补事实。
+- 新事实改变任务结构、检索反驳初始假设或验证暴露错误场景时，必须重路由并保留历史。
+- 简单事实走 Explore→一行 Strip→Consolidate 快速路径，但不豁免事实锚点与时效核对。
+- 主协议只定义契约；具体场景策略由 `task-strategy` 插件承载。详见 [references/task-routing.md](references/task-routing.md)。
 
 ## 知识 wiki 层（LLM-wiki 思维过程具象化）
 
@@ -131,13 +140,7 @@ E 沉淀 Evolve       → 新共性、新模式写回进化库与 wiki 层；结
 
 ## 分场景速查
 
-- **分析类任务**（"帮我看懂 X / 拆解 X"）：重点跑 Explore→Strip→Stack→Extract，产出本质卡片 + 层级链。
-- **设计类任务**（"设计 X 方案 / 架构"）：重点跑 Extract→Network→Consolidate，必须给类比表与选型理由（公理 2）。
-- **拼装类任务**（"把 A+B+C 拼成闭环"）：直接进 Network，用闭环判据检验；参照公理 5，尝试为同一组组件给出第二种拼装主线。
-- **复盘类任务**（"复盘这次任务"）：跑 Explore（回放事实）→Strip（成败的第一层本质）→Consolidate（辩证取舍）→Evolve（沉淀）。
-- **指导学习类任务**（"我要学 X"）：用 Extract 为该领域构建框架图谱，按共性安排学习顺序。
-- **协作类任务**（"给团队出份报告"）：Consolidate 后走产出协议，出思维报告。
-- **能力不够时**（"这事该用什么做"）：走路由层——判断→寻址→加载→预算→收割，不硬扛。
+场景策略的唯一事实源是 `plugins/task-strategy/strategies/`，用 `strategy.py --list` 查看；主协议不再维护重复的场景表。协作类任务在 Consolidate 后走产出协议；能力不足时在 Extract 后走 Skill 能力路由。
 
 ## 思维质量红线
 
@@ -148,4 +151,4 @@ E 沉淀 Evolve       → 新共性、新模式写回进化库与 wiki 层；结
 - 每个架构选型必须给出一个类比依据（公理 2）。
 - 每个闭环方案必须指出"如果拿掉哪一环，闭环就断"（公理 5）。
 - 每次进项目先读 snapshot 再动手；加载文件超出预算先压缩（见 routing.md 预算表）。
-- 复杂参考内容按需读取：[references/philosophy.md](references/philosophy.md)（公理展开与示例）、[references/pipeline.md](references/pipeline.md)（pipeline 与 dev-pipeline 集成详规）、[references/wiki.md](references/wiki.md)（wiki 层协议）、[references/routing.md](references/routing.md)（路由与预算）、[references/self-evolve.md](references/self-evolve.md)（无感知进化协议）、[references/report.md](references/report.md)（产出报告协议）、[references/plugins.md](references/plugins.md)（软约束插件化规范）、[references/meta.md](references/meta.md)（元体系：五层结构与闭环）、[references/side-channel.md](references/side-channel.md)（旁路沉淀：不打断主线的思路跃迁）。
+- 复杂参考内容按需读取：[references/philosophy.md](references/philosophy.md)（公理展开与示例）、[references/pipeline.md](references/pipeline.md)（pipeline 与 dev-pipeline 集成详规）、[references/wiki.md](references/wiki.md)（wiki 层协议）、[references/task-routing.md](references/task-routing.md)（任务策略契约与重路由）、[references/routing.md](references/routing.md)（能力路由与预算）、[references/self-evolve.md](references/self-evolve.md)（无感知进化协议）、[references/report.md](references/report.md)（产出报告协议）、[references/plugins.md](references/plugins.md)（软约束插件化规范）、[references/meta.md](references/meta.md)（元体系：五层结构与闭环）、[references/side-channel.md](references/side-channel.md)（旁路沉淀：不打断主线的思路跃迁）。
