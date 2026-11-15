@@ -1,0 +1,20 @@
+{
+  "name": "analysis",
+  "description": "理解对象、拆解现象并建立分层本质",
+  "essence_path": ["Explore", "Strip", "Stack", "Extract", "Consolidate", "Evolve"],
+  "wiki": {
+    "max_level": "L2",
+    "drill_down_when": ["本质判断缺少关系证据", "需要核对历史结论的原始依据"]
+  },
+  "retrieval": {
+    "strategy": ["MOC 关系网", "共性模式", "必要原始材料"],
+    "stop_when": ["继续下钻不再改变对关系的理解或行动"]
+  },
+  "verification": {
+    "profile": "chain-and-sample",
+    "strength": 2,
+    "required_evidence": ["每个本质判断指向的事物关系", "至少一个可证伪观察"]
+  },
+  "reroute_when": ["分析目标转为方案选型", "现象实际指向故障排查"],
+  "budget_profile": "default"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "retrospective",
+  "description": "复盘任务并区分事实、事后解释和新假设",
+  "essence_path": ["Explore", "Strip", "Consolidate", "Evolve"],
+  "wiki": {
+    "max_level": "L3",
+    "drill_down_when": ["需要回放当时日志或快照", "记忆与记录不一致"]
+  },
+  "retrieval": {
+    "strategy": ["任务日志", "历史快照", "当时证据", "后续结果"],
+    "stop_when": ["事实、解释和假设已分开且改进项有证据"]
+  },
+  "verification": {
+    "profile": "evidence-chain",
+    "strength": 2,
+    "required_evidence": ["当时记录", "事实与解释分类", "改进项对应证据"]
+  },
+  "reroute_when": ["复盘暴露未解决故障需转诊断", "发现普适设计问题需转设计"],
+  "budget_profile": "default"
+}

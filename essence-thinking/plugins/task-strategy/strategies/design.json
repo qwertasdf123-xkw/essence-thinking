@@ -1,0 +1,20 @@
+{
+  "name": "design",
+  "description": "架构或方案设计、技术选型与闭环拼装",
+  "essence_path": ["Explore", "Strip", "Extract", "Network", "Consolidate", "Evolve"],
+  "wiki": {
+    "max_level": "L2",
+    "drill_down_when": ["选型依赖未验证假设", "既有模式与新约束冲突"]
+  },
+  "retrieval": {
+    "strategy": ["共性模式", "类比案例", "方案约束", "反例"],
+    "stop_when": ["备选方案边界明确且新增信息不再改变选型"]
+  },
+  "verification": {
+    "profile": "full-red-team",
+    "strength": 3,
+    "required_evidence": ["类比依据", "选型边界", "闭环断点", "主要反例"]
+  },
+  "reroute_when": ["关键事实尚未确认需先研究", "既有方案失效需转诊断"],
+  "budget_profile": "default"
+}

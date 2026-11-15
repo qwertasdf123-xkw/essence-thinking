@@ -1,0 +1,20 @@
+{
+  "name": "fact",
+  "description": "简单事实查询的最小闭环，不启动重型推理",
+  "essence_path": ["Explore", "Strip", "Consolidate"],
+  "wiki": {
+    "max_level": "L0",
+    "drill_down_when": ["快照不足以回答", "事实可能变化或存在冲突"]
+  },
+  "retrieval": {
+    "strategy": ["权威或原始来源", "必要的时效核对"],
+    "stop_when": ["所问对象与属性有当前证据支持"]
+  },
+  "verification": {
+    "profile": "direct-evidence",
+    "strength": 1,
+    "required_evidence": ["直接事实来源", "需要时的日期或版本"]
+  },
+  "reroute_when": ["查询依赖复杂因果或方案判断", "来源冲突需要进一步研究"],
+  "budget_profile": "minimal"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "research",
+  "description": "获取外部事实、比较来源并形成可引用认识",
+  "essence_path": ["Explore", "Strip", "Stack", "Extract", "Consolidate", "Evolve"],
+  "wiki": {
+    "max_level": "L2",
+    "drill_down_when": ["二手摘要与原始来源可能不一致", "关键事实影响后续决策"]
+  },
+  "retrieval": {
+    "strategy": ["主题关系", "原始来源", "交叉来源", "反证"],
+    "stop_when": ["关键问题均有当前证据且来源分歧已解释"]
+  },
+  "verification": {
+    "profile": "source-triangulation",
+    "strength": 2,
+    "required_evidence": ["当前来源", "来源日期", "关键分歧或不确定性"]
+  },
+  "reroute_when": ["研究结论已足以进入设计决策", "来源持续冲突需转诊断检索策略"],
+  "budget_profile": "default"
+}

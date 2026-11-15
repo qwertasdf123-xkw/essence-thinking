@@ -1,0 +1,20 @@
+{
+  "name": "assembly",
+  "description": "把已有组件或工作流拼装成逻辑闭环",
+  "essence_path": ["Explore", "Strip", "Network", "Consolidate", "Evolve"],
+  "wiki": {
+    "max_level": "L2",
+    "drill_down_when": ["组件接口不明确", "依赖关系或既有闭环缺少证据"]
+  },
+  "retrieval": {
+    "strategy": ["组件接口", "既有闭环", "依赖关系", "替代拼装主线"],
+    "stop_when": ["输入、变换、产出、验证、沉淀五环均有着落"]
+  },
+  "verification": {
+    "profile": "closure-test",
+    "strength": 2,
+    "required_evidence": ["组件接口", "依赖方向", "拿掉关键环节后的断点"]
+  },
+  "reroute_when": ["缺少组件需先设计或委托能力", "闭环中断源于既有组件故障"],
+  "budget_profile": "default"
+}

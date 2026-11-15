@@ -1,0 +1,20 @@
+{
+  "name": "learning",
+  "description": "按前置概念和共性组织可迁移学习",
+  "essence_path": ["Explore", "Strip", "Stack", "Extract", "Network", "Consolidate", "Evolve"],
+  "wiki": {
+    "max_level": "L2",
+    "drill_down_when": ["前置概念不清", "共性关系无法迁移到新对象"]
+  },
+  "retrieval": {
+    "strategy": ["前置概念", "共性关系", "递进示例", "迁移练习"],
+    "stop_when": ["能在新对象上应用关系而非只复述定义"]
+  },
+  "verification": {
+    "profile": "transfer-test",
+    "strength": 2,
+    "required_evidence": ["前置关系图", "新对象迁移结果", "误解或边界"]
+  },
+  "reroute_when": ["学习材料事实不足需先研究", "目标转为制作具体方案"],
+  "budget_profile": "default"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "diagnosis",
+  "description": "沿故障关系和证据 DAG 排查并修正假设",
+  "essence_path": ["Explore", "Strip", "Stack", "Network", "Consolidate", "Evolve"],
+  "wiki": {
+    "max_level": "L3",
+    "drill_down_when": ["需要原始报错或日志", "历史修复经验与当前症状不一致"]
+  },
+  "retrieval": {
+    "strategy": ["原始报错", "故障关系", "最小复现", "对照实验", "排查 DAG"],
+    "stop_when": ["结论被实际观测或工具结果支持且修复后可复验"]
+  },
+  "verification": {
+    "profile": "observation-backed",
+    "strength": 3,
+    "required_evidence": ["原始错误", "区分性实验", "修复后复验", "未排除假设"]
+  },
+  "reroute_when": ["证据推翻当前故障层", "根因确认后转为修复设计"],
+  "budget_profile": "default"
+}

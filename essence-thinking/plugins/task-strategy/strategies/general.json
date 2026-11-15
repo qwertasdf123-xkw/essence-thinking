@@ -1,0 +1,20 @@
+{
+  "name": "general",
+  "description": "未形成明确场景时的完整默认闭环",
+  "essence_path": ["Explore", "Strip", "Stack", "Extract", "Network", "Consolidate", "Evolve"],
+  "wiki": {
+    "max_level": "L1",
+    "drill_down_when": ["摘要不足以支持当前判断", "MOC 之间存在冲突"]
+  },
+  "retrieval": {
+    "strategy": ["当前主题关系", "相关共性模式"],
+    "stop_when": ["新增材料不再改变下一步行动"]
+  },
+  "verification": {
+    "profile": "chain-and-sample",
+    "strength": 2,
+    "required_evidence": ["结论的事实锚点", "适用边界"]
+  },
+  "reroute_when": ["任务目标或主要关系发生变化"],
+  "budget_profile": "default"
+}
