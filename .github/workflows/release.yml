@@ -25,10 +25,10 @@ jobs:
         run: |
           tag="$GITHUB_REF_NAME"
           ver="${tag#v}"
-          notes="releases/${ver}.md"
+          notes="essence-thinking/releases/v${ver}.md"
           if [ ! -f "$notes" ]; then
             short="${ver%%.*}"
-            notes="releases/v${short}.md"
+            notes="essence-thinking/releases/v${short}.md"
           fi
           if [ ! -f "$notes" ]; then
             echo "Release notes not found for tag $tag (looked in releases/)" >&2
